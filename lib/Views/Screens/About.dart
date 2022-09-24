@@ -14,6 +14,7 @@ class _AboutUsState extends State<AboutUs> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
     return ResponsiveWrapper(
       shrinkWrap: true,
       child: ResponsiveRowColumn(
@@ -36,7 +37,6 @@ class _AboutUsState extends State<AboutUs> {
           ),
           ResponsiveRowColumnItem(
             rowColumn: true,
-            rowFlex: 1,
             child: ResponsiveRowColumn(
               columnCrossAxisAlignment: CrossAxisAlignment.start,
               rowCrossAxisAlignment: CrossAxisAlignment.start,
@@ -47,8 +47,9 @@ class _AboutUsState extends State<AboutUs> {
                   : ResponsiveRowColumnType.ROW,
               children: [
                 ResponsiveRowColumnItem(
+                  rowFlex: 50,
                   child: Container(
-                    width: size.width * 0.5,
+                    // width: size.width * 0.5,
                     child: Text(
                       kAboutMeContent,
                       style: Theme.of(context).textTheme.headline2?.copyWith(
@@ -71,10 +72,15 @@ class _AboutUsState extends State<AboutUs> {
                   ),
                 ),
                 ResponsiveRowColumnItem(
+                  rowFlex: 50,
                   child: Image.asset(
-                    'assets/icons/flutter.png',
-                    width: size.width * 0.3,
-                    height: size.height * 0.5,
+                    'assets/icons/hasan.png',
+                    height: ResponsiveWrapper.of(context).isSmallerThan(DESKTOP)
+                        ? size.height * 0.9
+                        : size.height * 0.8,
+                    width: ResponsiveWrapper.of(context).isSmallerThan(DESKTOP)
+                        ? size.width * 0.9
+                        : size.width * 0.7,
                   ),
                 ),
               ],
@@ -95,7 +101,7 @@ class _AboutUsState extends State<AboutUs> {
             child: getVertialSpace(height: size.height * 0.050),
           ),
           ResponsiveRowColumnItem(
-            rowFlex: 1,
+            rowFlex: 2,
             child: ResponsiveRowColumn(
               layout: ResponsiveWrapper.of(context).isSmallerThan(DESKTOP)
                   ? ResponsiveRowColumnType.COLUMN
@@ -107,7 +113,9 @@ class _AboutUsState extends State<AboutUs> {
               children: [
                 ResponsiveRowColumnItem(
                   child: getCircleSkills(
-                    radius: size.height * 0.1,
+                    radius: ResponsiveWrapper.of(context).isSmallerThan(DESKTOP)
+                        ? size.height * 0.050
+                        : size.height * 0.1,
                     child: Image.asset(
                       'assets/icons/flutter.png',
                     ),
@@ -116,7 +124,7 @@ class _AboutUsState extends State<AboutUs> {
                 ResponsiveRowColumnItem(
                   child: !ResponsiveWrapper.of(context).isSmallerThan(DESKTOP)
                       ? getHorizontalSpace(
-                          width: size.width * 0.02,
+                          width: size.width * 0.04,
                         )
                       : getVertialSpace(
                           height: size.height * 0.02,
@@ -124,16 +132,18 @@ class _AboutUsState extends State<AboutUs> {
                 ),
                 ResponsiveRowColumnItem(
                   child: getCircleSkills(
-                    radius: size.height * 0.1,
+                    radius: ResponsiveWrapper.of(context).isSmallerThan(DESKTOP)
+                        ? size.height * 0.050
+                        : size.height * 0.1,
                     child: Image.asset(
-                      'assets/icons/github.png',
+                      'assets/icons/androidstudio.png',
                     ),
                   ),
                 ),
                 ResponsiveRowColumnItem(
                   child: !ResponsiveWrapper.of(context).isSmallerThan(DESKTOP)
                       ? getHorizontalSpace(
-                          width: size.width * 0.02,
+                          width: size.width * 0.04,
                         )
                       : getVertialSpace(
                           height: size.height * 0.02,
@@ -141,16 +151,56 @@ class _AboutUsState extends State<AboutUs> {
                 ),
                 ResponsiveRowColumnItem(
                   child: getCircleSkills(
-                    radius: size.height * 0.1,
+                    radius: ResponsiveWrapper.of(context).isSmallerThan(DESKTOP)
+                        ? size.height * 0.050
+                        : size.height * 0.1,
                     child: Image.asset(
-                      'assets/icons/instagram.png',
+                      'assets/icons/firebase.png',
                     ),
                   ),
                 ),
                 ResponsiveRowColumnItem(
                   child: !ResponsiveWrapper.of(context).isSmallerThan(DESKTOP)
                       ? getHorizontalSpace(
-                          width: size.width * 0.02,
+                          width: size.width * 0.04,
+                        )
+                      : getVertialSpace(
+                          height: size.height * 0.02,
+                        ),
+                ),
+                ResponsiveRowColumnItem(
+                  child: getCircleSkills(
+                    radius: ResponsiveWrapper.of(context).isSmallerThan(DESKTOP)
+                        ? size.height * 0.050
+                        : size.height * 0.1,
+                    child: Image.asset(
+                      'assets/icons/python.png',
+                    ),
+                  ),
+                ),
+                ResponsiveRowColumnItem(
+                  child: !ResponsiveWrapper.of(context).isSmallerThan(DESKTOP)
+                      ? getHorizontalSpace(
+                          width: size.width * 0.04,
+                        )
+                      : getVertialSpace(
+                          height: size.height * 0.02,
+                        ),
+                ),
+                ResponsiveRowColumnItem(
+                  child: getCircleSkills(
+                    radius: ResponsiveWrapper.of(context).isSmallerThan(DESKTOP)
+                        ? size.height * 0.050
+                        : size.height * 0.1,
+                    child: Image.asset(
+                      'assets/icons/wordpress.png',
+                    ),
+                  ),
+                ),
+                ResponsiveRowColumnItem(
+                  child: !ResponsiveWrapper.of(context).isSmallerThan(DESKTOP)
+                      ? getHorizontalSpace(
+                          width: size.width * 0.04,
                         )
                       : getVertialSpace(
                           height: size.height * 0.02,

@@ -21,7 +21,6 @@ class _FooterState extends State<Footer> {
         rowPadding: const EdgeInsets.all(30),
         columnPadding: const EdgeInsets.all(30),
         layout: ResponsiveRowColumnType.COLUMN,
-        columnVerticalDirection: VerticalDirection.down,
         children: [
           ResponsiveRowColumnItem(
             child: getVertialSpace(height: size.height * 0.1),
@@ -29,7 +28,7 @@ class _FooterState extends State<Footer> {
           ResponsiveRowColumnItem(
             rowFlex: 1,
             child: Text(
-              'What\'s Next?',
+              'Thanks for stopping by :)',
               style: getHeadingStyle3(context: context),
             ),
           ),
@@ -39,7 +38,7 @@ class _FooterState extends State<Footer> {
           ResponsiveRowColumnItem(
             rowFlex: 1,
             child: Text(
-              kAboutMeContent,
+              kFooterDescription,
               style: Theme.of(context).textTheme.headline3?.copyWith(
                   color: Colors.greenAccent,
                   fontSize: ResponsiveValue(
@@ -77,21 +76,26 @@ class _FooterState extends State<Footer> {
                 ],
               ).value!.toDouble()),
               rowMainAxisAlignment: MainAxisAlignment.spaceBetween,
-              rowCrossAxisAlignment: CrossAxisAlignment.end,
+              rowCrossAxisAlignment: CrossAxisAlignment.center,
               layout: ResponsiveRowColumnType.ROW,
               children: [
                 ResponsiveRowColumnItem(
                   child: FlatButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      await launchInBrowser(url: emailLaunchUri);
+                    },
+                    height: size.height * 0.1,
+                    minWidth: size.width * 0.15,
+                    hoverColor: Colors.black,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
+                      borderRadius: BorderRadius.circular(0),
                       side: const BorderSide(
                         color: Colors.white,
                       ),
                     ),
                     child: Text(
                       kGetInTouch,
-                      style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                      style: Theme.of(context).textTheme.headline1?.copyWith(
                           color: Colors.white,
                           fontSize: ResponsiveValue(
                             context,
@@ -111,26 +115,114 @@ class _FooterState extends State<Footer> {
                   ),
                 ),
                 ResponsiveRowColumnItem(
-                  child: Text(
-                    kYourName,
-                    style: Theme.of(context).textTheme.headline2?.copyWith(
-                        color: Colors.grey,
-                        fontSize: ResponsiveValue(
-                          context,
-                          defaultValue: 15.0,
-                          valueWhen: [
-                            const Condition.smallerThan(
-                              name: MOBILE,
-                              value: 15.0,
-                            ),
-                            const Condition.largerThan(
-                              name: TABLET,
-                              value: 20.0,
-                            )
-                          ],
-                        ).value),
+                  child: InkWell(
+                    onTap: () async {
+                      await launchInBrowser(url: Uri.parse(kLinkedInUrl));
+                    },
+                    child: Text(
+                      kYourName,
+                      style: Theme.of(context).textTheme.headline2?.copyWith(
+                          color: Colors.grey,
+                          fontSize: ResponsiveValue(
+                            context,
+                            defaultValue: 15.0,
+                            valueWhen: [
+                              const Condition.smallerThan(
+                                name: MOBILE,
+                                value: 15.0,
+                              ),
+                              const Condition.largerThan(
+                                name: TABLET,
+                                value: 20.0,
+                              )
+                            ],
+                          ).value),
+                    ),
                   ),
-                )
+                ),
+              ],
+            ),
+          ),
+          ResponsiveRowColumnItem(
+            child: getVertialSpace(height: size.height * 0.1),
+          ),
+          ResponsiveRowColumnItem(
+            rowFlex: 1,
+            child: Text(
+              'Follow me!',
+              style: getHeadingStyle3(
+                  context: context,
+                  DefaultFontSize: 18,
+                  MobileFontSize: 18,
+                  TabletFontSize: 22),
+            ),
+          ),
+          ResponsiveRowColumnItem(
+            child: ResponsiveRowColumn(
+              columnMainAxisAlignment: MainAxisAlignment.center,
+              rowMainAxisAlignment: MainAxisAlignment.center,
+              layout: ResponsiveWrapper.of(context).isSmallerThan(DESKTOP)
+                  ? ResponsiveRowColumnType.COLUMN
+                  : ResponsiveRowColumnType.ROW,
+              children: [
+                ResponsiveRowColumnItem(
+                  child: InkWell(
+                    onTap: () async {
+                      await launchInBrowser(url: Uri.parse(kLinkedInUrl));
+                    },
+                    child: Image.asset(
+                      'assets/icons/linkedin.png',
+                      height: 50,
+                      width: 50,
+                    ),
+                  ),
+                ),
+                ResponsiveRowColumnItem(
+                  child: getVertialSpace(
+                      height:
+                          ResponsiveWrapper.of(context).isSmallerThan(DESKTOP)
+                              ? size.height * 0.020
+                              : size.height * 0.015),
+                ),
+                ResponsiveRowColumnItem(
+                  child: InkWell(
+                    onTap: () async {
+                      await launchInBrowser(url: Uri.parse(kInstagramUrl));
+                    },
+                    child: Image.asset(
+                      'assets/icons/instagram.png',
+                      height: 50,
+                      width: 50,
+                    ),
+                  ),
+                ),
+                ResponsiveRowColumnItem(
+                  child: getVertialSpace(
+                      height:
+                          ResponsiveWrapper.of(context).isSmallerThan(DESKTOP)
+                              ? size.height * 0.020
+                              : size.height * 0.015),
+                ),
+                ResponsiveRowColumnItem(
+                  child: InkWell(
+                    onTap: () async {
+                      await launchInBrowser(url: Uri.parse(kGitHubUrl));
+                    },
+                    child: Image.asset(
+                      'assets/icons/github.png',
+                      color: Colors.white,
+                      height: 50,
+                      width: 50,
+                    ),
+                  ),
+                ),
+                ResponsiveRowColumnItem(
+                  child: getVertialSpace(
+                      height:
+                          ResponsiveWrapper.of(context).isSmallerThan(DESKTOP)
+                              ? size.height * 0.020
+                              : size.height * 0.015),
+                ),
               ],
             ),
           ),

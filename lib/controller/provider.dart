@@ -7,7 +7,6 @@ import '../Models/Git/repo_model.dart';
 class ControllerProvider extends ChangeNotifier {
   static var ho = http.Client();
   Future<List<RepoModel>> getRepoDetails() async {
-    debugPrint(kGitUrl);
     var response = await ho.get(
       Uri.parse(kGitUrl),
     );
@@ -16,13 +15,12 @@ class ControllerProvider extends ChangeNotifier {
 
       return model;
     } else {
-      debugPrint('issue');
       return [
         RepoModel(
           name: 'Check my Git Repo Directly',
           owner: Owner(
-              avatarUrl:
-                  'https://avatars.githubusercontent.com/u/48181995?v=4'),
+            avatarUrl: 'https://avatars.githubusercontent.com/u/48181995?v=4',
+          ),
         ),
       ];
     }

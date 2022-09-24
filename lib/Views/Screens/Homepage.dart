@@ -16,7 +16,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      height: MediaQuery.of(context).size.height * 0.9,
+      height: size.height,
       child: ResponsiveWrapper(
         shrinkWrap: true,
         child: ResponsiveRowColumn(
@@ -28,7 +28,10 @@ class _HomePageState extends State<HomePage> {
           columnVerticalDirection: VerticalDirection.down,
           children: [
             ResponsiveRowColumnItem(
-              child: getVertialSpace(height: size.height * 0.1),
+              child: getVertialSpace(
+                  height: ResponsiveWrapper.of(context).isSmallerThan(DESKTOP)
+                      ? size.height * 0.2
+                      : size.height * 0.15),
             ),
             ResponsiveRowColumnItem(
               rowFlex: 1,
@@ -38,7 +41,14 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             ResponsiveRowColumnItem(
+              child: getVertialSpace(
+                  height: ResponsiveWrapper.of(context).isSmallerThan(DESKTOP)
+                      ? size.height * 0.020
+                      : size.height * 0.015),
+            ),
+            ResponsiveRowColumnItem(
               rowFlex: 1,
+              rowColumn: true,
               child: Text(
                 kYourName,
                 style: Theme.of(context).textTheme.headline2?.copyWith(
@@ -60,16 +70,22 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             ResponsiveRowColumnItem(
+              child: getVertialSpace(
+                  height: ResponsiveWrapper.of(context).isSmallerThan(DESKTOP)
+                      ? size.height * 0.020
+                      : size.height * 0.015),
+            ),
+            ResponsiveRowColumnItem(
               rowFlex: 1,
               rowColumn: true,
               rowFit: FlexFit.loose,
               child: Row(
                 children: [
                   Text(
-                    'I Build Application\'s using ',
+                    'I build Application\'s using ',
                     style: getHeadingStyle3(
-                      DefaultFontSize: 20,
-                      MobileFontSize: 20,
+                      DefaultFontSize: 18,
+                      MobileFontSize: 18,
                       context: context,
                     ),
                   ),
@@ -77,8 +93,10 @@ class _HomePageState extends State<HomePage> {
                     isRepeatingAnimation: true,
                     repeatForever: true,
                     animatedTexts: YourWork.map(
-                      (e) => RotateAnimatedText(e,
-                          alignment: Alignment.center,
+                      (e) => TypewriterAnimatedText(e,
+                          speed: Duration(milliseconds: 250),
+                          curve: Curves.easeInExpo,
+                          cursor: '_',
                           textStyle: getHeadingStyle3(
                             context: context,
                             MobileFontSize: 18,
@@ -92,29 +110,36 @@ class _HomePageState extends State<HomePage> {
             ),
             ResponsiveRowColumnItem(
               rowFlex: 2,
+              rowColumn: true,
               child: ResponsiveRowColumn(
                 rowPadding: EdgeInsets.only(
-                    top: ResponsiveValue(
-                  context,
-                  defaultValue: MediaQuery.of(context).size.height * 0.2,
-                  valueWhen: [
-                    Condition.smallerThan(
-                      name: MOBILE,
-                      value: MediaQuery.of(context).size.height * 0.1,
-                    ),
-                    Condition.largerThan(
-                      name: TABLET,
-                      value: MediaQuery.of(context).size.height * 0.15,
-                    )
-                  ],
-                ).value!.toDouble()),
+                  top: ResponsiveValue(
+                    context,
+                    defaultValue: MediaQuery.of(context).size.height * 0.2,
+                    valueWhen: [
+                      Condition.smallerThan(
+                        name: MOBILE,
+                        value: MediaQuery.of(context).size.height * 0.1,
+                      ),
+                      Condition.largerThan(
+                        name: TABLET,
+                        value: MediaQuery.of(context).size.height * 0.15,
+                      )
+                    ],
+                  ).value!.toDouble(),
+                ),
                 rowMainAxisAlignment: MainAxisAlignment.spaceBetween,
                 rowCrossAxisAlignment: CrossAxisAlignment.center,
                 layout: ResponsiveRowColumnType.ROW,
                 children: [
                   ResponsiveRowColumnItem(
+                    rowColumn: true,
                     child: FlatButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        await launchInBrowser(url: Uri.parse(kResume));
+                      },
+                      height: size.height * 0.1,
+                      minWidth: size.width * 0.15,
                       hoverColor: Colors.black,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(0),
@@ -123,7 +148,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       child: Text(
-                        kGetInTouch,
+                        kMyResume,
                         style: Theme.of(context).textTheme.headline1?.copyWith(
                             color: Colors.white,
                             fontSize: ResponsiveValue(

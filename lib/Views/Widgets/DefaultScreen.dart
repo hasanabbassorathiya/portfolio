@@ -56,9 +56,8 @@ class _DefaultScreenState extends State<DefaultScreen> {
         elevation: 0,
       ),
       body: Container(
-        height: MediaQuery.of(context).size.height * 0.9,
+        height: MediaQuery.of(context).size.height,
         child: ListView(
-          shrinkWrap: true,
           children: [
             HomePage(),
             AboutUs(),
